@@ -12,7 +12,6 @@ class Book extends Component {
     render() {
         const { title, imageLinks, authors, imageWidth, imageHeight } = this.props.book;
         const bookCoverImage = `url("${imageLinks.thumbnail}")`;
-        console.log(bookCoverImage);
         return (
             <li>
                 <div className="book">

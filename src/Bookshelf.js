@@ -3,7 +3,7 @@ import Book from './Book'
 
 const Bookshelf = (props) => {
     const { bookshelfName, books } = props;
-    //Currently Reading
+    console.log('3###', bookshelfName);
     return (
         <div className="bookshelf">
             <h2 className="bookshelf-title">{bookshelfName}</h2>
