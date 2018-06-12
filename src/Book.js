@@ -10,16 +10,22 @@ class Book extends Component {
 
 
     render() {
-        const { title, backgroundImage, authors, imageWidth, imageHeight } = this.props.book;
+        const { title, imageLinks, authors, imageWidth, imageHeight } = this.props.book;
+        const bookCoverImage = `url("${imageLinks.thumbnail}")`;
+        console.log(bookCoverImage);
         return (
             <li>
                 <div className="book">
                     <div className="book-top">
-                        <div className="book-cover" style={{ width: imageWidth, height: imageHeight, backgroundImage: backgroundImage }}></div>
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: bookCoverImage }}></div>
                         <Changer shelfSelected={this.changeShelf} />
                     </div>
                     <div className="book-title">{title}</div>
-                    <div className="book-authors">{authors}</div>
+                    <div className="book-authors">{authors.map((author) => {
+                        return(
+                            <div><span>{author}</span><br /></div>
+                        );
+                    })}</div>
                 </div>
             </li>
         );
