@@ -1,8 +1,6 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Changer from './Changer'
-import Book from './Book'
 import Bookshelf from './Bookshelf';
 
 class BooksApp extends React.Component {
@@ -71,11 +69,6 @@ class BooksApp extends React.Component {
   }
 
 
-
-  changeShelf = (e) => {
-    console.log(e.target.value);
-  }
-
   render() {
     return (
       <div className="app">
@@ -108,7 +101,7 @@ class BooksApp extends React.Component {
               <div className="list-books-content">
                 <div>
                   <Bookshelf bookshelfName="Currently Reading" books={[this.state.books[0], this.state.books[1]]} />
-                  <Bookshelf bookshelfName="Want to Read" books={[this.state.books[0], this.state.books[1]]} />
+                  <Bookshelf bookshelfName="Want to Read" books={[this.state.books[1], this.state.books[2]]} />
                   <Bookshelf bookshelfName="Read" books={[this.state.books[4], this.state.books[5], this.state.books[6]]} />
                 </div>
               </div>
