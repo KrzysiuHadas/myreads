@@ -3,6 +3,7 @@ import Changer from './Changer'
 
 class Book extends Component {
 
+
     changeShelf = (e) => {
         console.log(e.target.value);
         console.log(this.props.book.title);
@@ -10,14 +11,14 @@ class Book extends Component {
 
 
     render() {
-        const { title, imageLinks, authors, imageWidth, imageHeight } = this.props.book;
+        const { title, imageLinks, authors, imageWidth, imageHeight, shelf } = this.props.book;
         const bookCoverImage = `url("${imageLinks.thumbnail}")`;
         return (
             <li>
                 <div className="book">
                     <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: bookCoverImage }}></div>
-                        <Changer shelfSelected={this.changeShelf} />
+                        <Changer shelf={shelf} shelfSelected={this.changeShelf} />
                     </div>
                     <div className="book-title">{title}</div>
                     <div className="book-authors">{authors.map((author) => {
