@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Book from './Book'
+import * as BooksAPI from './BooksAPI'
+
 class Search extends Component {
 
     state = {
@@ -8,39 +10,76 @@ class Search extends Component {
         books: [],
     }
 
-    handleChange = (e) => {
-        this.setState({ value: e.target.value });
-        console.log('state: ', this.state.value);
+    searchedBooks = (query) => {
+        BooksAPI.search(query)
+            .then((books) => {
+                this.setState({ books: books });
+            })
     }
 
+
+    handleChange = (e) => {
+        this.setState({ value: e.target.value });
+        const siusiak = this.searchedBooks(e.target.value);
+        this.compareAndMerge(this.state.books, this.props.booksOnShelves)
+    }
+
+
+
+    compareAndMerge = (searchResultArray, currentlyOnShelfArray) => {
+        if(Array.isArray(searchResultArray) && Array.isArray(currentlyOnShelfArray))
+        for (let i = 0; i < searchResultArray.length; i++) {
+            for (let i2 = 0; i2 < currentlyOnShelfArray.length; i2++) {
+                //sprawdzenie czy wieksza tabela zawiera element z mniejszej
+                if (searchResultArray[i].title === currentlyOnShelfArray[i2].title) {
+                    searchResultArray[i] = {
+                        ...searchResultArray[i],
+                        shelf: currentlyOnShelfArray[i2].shelf,
+                    }
+                    console.log('###', searchResultArray);
+                }
+            }
+        }
+
+        this.setState({books: searchResultArray});
+    }
+
+    // tak było: this.props.booksOnShelves.length > 0 && this.props.booksOnShelves.map((book) => {
+
+
     render() {
+        let currentBooks = [];
+        if(Array.isArray(this.state.books)) {
+            currentBooks = this.state.books;
+        }
         return (
             <div className="search-books">
                 <div className="search-books-bar">
                     <Link className="close-search" to='/' > Close </Link>
                     <div className="search-books-input-wrapper">
-                        {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
                         <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Search by title or author" />
                     </div>
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {
-                            this.props.booksOnShelves.length > 0 && this.props.booksOnShelves.map((book) => {
-                            return (
-                                <Book
-                                    book={book}
-                                    changerSwitched={(state, name) => {this.props.changeBookState(state, name)}}
-                                />
-                            );
-                        })}
+                            console.log('currentBooks: ', currentBooks)
+                        }
+
+                        {
+
+                                currentBooks.map((book) => {
+                                    
+                                    return (
+                                        <Book
+                                            key={book.id}
+                                            book={book}
+                                            changerSwitched={(state, name) => { this.props.changeBookState(state, name) }}
+                                        />
+                                    );
+                                })                            
+
+                        }
                     </ol>
                 </div>
             </div>

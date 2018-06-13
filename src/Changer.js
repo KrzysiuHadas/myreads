@@ -8,7 +8,7 @@ class Changer extends Component {
 
     handleChange = (e) => {
         this.setState({selected: e.target.value});
-        this.props.shelfSelected(e);
+        this.props.shelfSelected(e); 
     }
 
     render() {
@@ -18,10 +18,10 @@ class Changer extends Component {
                     onChange={this.handleChange}
                     value={this.state.selected}>
                     <option value="move" disabled>Move to...</option>
+                    <option value="none">None</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
                     <option value="read">Read</option>
-                    <option value="none">None</option>
                 </select>
             </div>
         );

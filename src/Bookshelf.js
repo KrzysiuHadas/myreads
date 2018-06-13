@@ -13,6 +13,7 @@ class Bookshelf extends Component {
                         {books.map((book) => {
                             return (
                                 <Book
+                                    key={book.id}
                                     book={book}
                                     changerSwitched={(state, name) => {
                                         this.props.onSwitched(state, name);

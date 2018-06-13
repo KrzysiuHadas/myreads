@@ -13,7 +13,11 @@ class Book extends Component {
 
     render() {
         const { title, imageLinks, authors, shelf } = this.props.book;
-        const bookCoverImage = `url("${imageLinks.thumbnail}")`;
+        let bookCoverImage = '';
+        if (imageLinks && imageLinks.thumbnail) {
+            bookCoverImage = `url("${imageLinks.thumbnail}")`;
+        }
+        console.log(shelf)
         return (
             <li>
                 <div className="book">
@@ -22,8 +26,8 @@ class Book extends Component {
                         <Changer shelf={shelf} shelfSelected={this.changeShelf} />
                     </div>
                     <div className="book-title">{title}</div>
-                    <div className="book-authors">{authors.map((author) => {
-                        return(
+                    <div className="book-authors">{authors && authors.map((author) => {
+                        return (
                             <div><span>{author}</span><br /></div>
                         );
                     })}</div>
