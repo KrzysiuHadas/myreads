@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+
 import Bookshelf from './Bookshelf'
 class BookList extends Component {
-
 
 
     render() {
@@ -15,13 +16,22 @@ class BookList extends Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <Bookshelf bookshelfName="Currently Reading" books={books.filter((book) => {return(book.shelf==='currentlyReading')})} />
-                  <Bookshelf bookshelfName="Want to Read" books={books.filter((book) => {return(book.shelf==='wantToRead')})} />
-                  <Bookshelf bookshelfName="Read" books={books.filter((book) => {return(book.shelf==='read')})} />
+                  <Bookshelf 
+                    bookshelfName="Currently Reading" 
+                    books={books.filter((book) => {return(book.shelf==='currentlyReading')})} 
+                    onSwitched={(state, name) => {this.props.changeBookState(state, name)}} />
+                  <Bookshelf 
+                    bookshelfName="Want to Read" 
+                    books={books.filter((book) => {return(book.shelf==='wantToRead')})} 
+                    onSwitched={(state, name) => {this.props.changeBookState(state, name)}} />
+                  <Bookshelf 
+                    bookshelfName="Read" 
+                    books={books.filter((book) => {return(book.shelf==='read')})} 
+                    onSwitched={(state, name) => {this.props.changeBookState(state, name)}} />
                 </div>
               </div>
               <div className="open-search">
-                <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+                <Link to='/search'>Add a book</Link>
               </div>
             </div>
 

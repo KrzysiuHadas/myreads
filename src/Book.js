@@ -7,11 +7,12 @@ class Book extends Component {
     changeShelf = (e) => {
         console.log(e.target.value);
         console.log(this.props.book.title);
+        this.props.changerSwitched(e.target.value, this.props.book.title);
     }
 
 
     render() {
-        const { title, imageLinks, authors, imageWidth, imageHeight, shelf } = this.props.book;
+        const { title, imageLinks, authors, shelf } = this.props.book;
         const bookCoverImage = `url("${imageLinks.thumbnail}")`;
         return (
             <li>

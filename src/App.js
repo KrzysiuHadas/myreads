@@ -23,16 +23,30 @@ class BooksApp extends React.Component {
       })
   }
 
+  updateBookState = (stateOfReadness, bookName) => {
+    console.log("yass here", stateOfReadness, bookName);
+    const currentBooks = this.state.books.slice();
+    console.log(currentBooks);
+    for( let i = 0; i < currentBooks.length; i++) {
+      console.log(i);
+      if(currentBooks[i].title === bookName) {
+        currentBooks[i].shelf = stateOfReadness;
+        console.log(currentBooks[i]);
+      }
+    }
+    console.log(currentBooks[1]);
+    this.setState((prevState) => ({
+      books: currentBooks,
+    }));
+  }
+
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-            <Search />
-        ) : (
-            <div>
-              <BookList books={this.state.books} />
-            </div>
-          )}
+            <Route path='/search' render={() => ( <Search /> )} />
+            <Route exact path='/' render={() => (
+              <BookList books={this.state.books} changeBookState={this.updateBookState}/>
+              )} />
       </div>
     )
   }

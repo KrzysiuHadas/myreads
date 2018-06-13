@@ -11,10 +11,6 @@ class Changer extends Component {
         this.props.shelfSelected(e);
     }
 
-    clicked = () => {
-        console.log(this.state.selected)
-    }
-
     render() {
         return (
             <div className="book-shelf-changer">
@@ -27,7 +23,6 @@ class Changer extends Component {
                     <option value="read">Read</option>
                     <option value="none">None</option>
                 </select>
-                <button onClick={this.clicked}> hey </button>
             </div>
         );
     }
