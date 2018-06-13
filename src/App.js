@@ -3,14 +3,12 @@ import { Route } from 'react-router-dom'
 
 import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Bookshelf from './Bookshelf'
 import Search from './Search'
 import BookList from './BookList'
 
-class BooksApp extends React.Component {
+export default class BooksApp extends React.Component {
 
   state = {
-    showSearchPage: false,
     books: [],
   }
 
@@ -43,7 +41,9 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-            <Route path='/search' render={() => ( <Search /> )} />
+            <Route path='/search' render={() => ( 
+              <Search booksOnShelves={this.state.books} changeBookState={this.updateBookState}/> 
+              )} />
             <Route exact path='/' render={() => (
               <BookList books={this.state.books} changeBookState={this.updateBookState}/>
               )} />
@@ -51,5 +51,3 @@ class BooksApp extends React.Component {
     )
   }
 }
-
-export default BooksApp
