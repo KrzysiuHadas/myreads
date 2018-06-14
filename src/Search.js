@@ -10,18 +10,20 @@ class Search extends Component {
         books: [],
     }
 
-    searchedBooks = (query) => {
-        BooksAPI.search(query)
-            .then((books) => {
-                this.setState({ books: books });
-            })
-    }
+    searchedBooks = (query) => BooksAPI.search(query)
 
-
-    handleChange = (e) => {
+    
+    handleChange = async (e) => {
         this.setState({ value: e.target.value });
-        const siusiak = this.searchedBooks(e.target.value);
-        this.compareAndMerge(this.state.books, this.props.booksOnShelves)
+        try {
+            const books = await this.searchedBooks(e.target.value);    
+            this.compareAndMerge(books, this.props.booksOnShelves)
+        } catch (error) {
+            console.error(error);
+        }
+        
+        
+        
     }
 
 
@@ -36,7 +38,7 @@ class Search extends Component {
                         ...searchResultArray[i],
                         shelf: currentlyOnShelfArray[i2].shelf,
                     }
-                    console.log('###', searchResultArray);
+                    //console.log('###', searchResultArray);
                 }
             }
         }
@@ -63,7 +65,7 @@ class Search extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {
-                            console.log('currentBooks: ', currentBooks)
+                            //console.log('currentBooks: ', currentBooks)
                         }
 
                         {

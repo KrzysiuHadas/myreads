@@ -17,7 +17,7 @@ class Book extends Component {
         if (imageLinks && imageLinks.thumbnail) {
             bookCoverImage = `url("${imageLinks.thumbnail}")`;
         }
-        console.log(shelf)
+        //console.log(shelf)
         return (
             <li>
                 <div className="book">
