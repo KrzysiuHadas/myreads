@@ -7,7 +7,7 @@ class Book extends Component {
     changeShelf = (e) => {
         console.log(e.target.value);
         console.log(this.props.book.title);
-        this.props.changerSwitched(e.target.value, this.props.book.title);
+        this.props.changerSwitched(e.target.value, this.props.book);
     }
 
 

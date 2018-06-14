@@ -12,7 +12,6 @@ export default class BooksApp extends React.Component {
     books: [],
   }
 
-
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
@@ -22,21 +21,32 @@ export default class BooksApp extends React.Component {
       })
   }
 
-  updateBookState = (stateOfReadness, bookName) => {
-    console.log("yass here", stateOfReadness, bookName);
+  updateBookState = (stateOfReadness, book) => {
+    //jesli to nowa ksiazka to najpierw dodac do tablicy!!!
+    let existingFlag = 0;
     const currentBooks = this.state.books.slice();
-    console.log(currentBooks);
     for( let i = 0; i < currentBooks.length; i++) {
-      console.log(i);
-      if(currentBooks[i].title === bookName) {
-        currentBooks[i].shelf = stateOfReadness;
-        console.log(currentBooks[i]);
+      if(currentBooks[i].title === book.title) {
+        currentBooks[i] = {
+          ...currentBooks[i],
+          shelf: stateOfReadness,
+        }
+        existingFlag = 1;
       }
     }
-    console.log(currentBooks[1]);
+    console.log("###", book);
+    if(!existingFlag) {
+      book = {
+        ...book,
+        shelf: stateOfReadness,
+      };
+      currentBooks.push(book);
+    }
+    console.log("@@@", currentBooks);
     this.setState((prevState) => ({
       books: currentBooks,
     }));
+    //console.log(this.state.books);
   }
 
   render() {

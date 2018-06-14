@@ -12,7 +12,7 @@ class Search extends Component {
 
     searchedBooks = (query) => BooksAPI.search(query)
 
-    
+
     handleChange = async (e) => {
         this.setState({ value: e.target.value });
         try {
@@ -46,8 +46,6 @@ class Search extends Component {
         this.setState({books: searchResultArray});
     }
 
-    // tak było: this.props.booksOnShelves.length > 0 && this.props.booksOnShelves.map((book) => {
-
 
     render() {
         let currentBooks = [];
@@ -76,7 +74,7 @@ class Search extends Component {
                                         <Book
                                             key={book.id}
                                             book={book}
-                                            changerSwitched={(state, name) => { this.props.changeBookState(state, name) }}
+                                            changerSwitched={(state, book) => { this.props.changeBookState(state, book) }}
                                         />
                                     );
                                 })                            
