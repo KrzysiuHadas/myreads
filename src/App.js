@@ -22,9 +22,12 @@ export default class BooksApp extends React.Component {
   }
 
   updateBookState = (stateOfReadness, book) => {
-    //jesli to nowa ksiazka to najpierw dodac do tablicy!!!
+    // flag that is changed when a book non-existing on the shelves changes its selected state
     let existingFlag = 0;
     const currentBooks = this.state.books.slice();
+    // loop that goes through all shelved books and sees if a book that was reshelved is already there
+    // in that case we change the old state to the new one
+    // if its not existing set flag to 1
     for( let i = 0; i < currentBooks.length; i++) {
       if(currentBooks[i].title === book.title) {
         currentBooks[i] = {
@@ -34,7 +37,7 @@ export default class BooksApp extends React.Component {
         existingFlag = 1;
       }
     }
-    console.log("###", book);
+    // if a book has been assigned a new shelf but wasn't on the shelves before, we add it to the shelf
     if(!existingFlag) {
       book = {
         ...book,
@@ -42,11 +45,9 @@ export default class BooksApp extends React.Component {
       };
       currentBooks.push(book);
     }
-    console.log("@@@", currentBooks);
     this.setState((prevState) => ({
       books: currentBooks,
     }));
-    //console.log(this.state.books);
   }
 
   render() {

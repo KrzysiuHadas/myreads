@@ -12,7 +12,6 @@ class Search extends Component {
 
     searchedBooks = (query) => BooksAPI.search(query)
 
-
     handleChange = async (e) => {
         this.setState({ value: e.target.value });
         try {
@@ -20,32 +19,24 @@ class Search extends Component {
             this.compareAndMerge(books, this.props.booksOnShelves)
         } catch (error) {
             console.error(error);
-        }
-        
-        
-        
+        }  
     }
-
-
 
     compareAndMerge = (searchResultArray, currentlyOnShelfArray) => {
         if(Array.isArray(searchResultArray) && Array.isArray(currentlyOnShelfArray))
         for (let i = 0; i < searchResultArray.length; i++) {
             for (let i2 = 0; i2 < currentlyOnShelfArray.length; i2++) {
-                //sprawdzenie czy wieksza tabela zawiera element z mniejszej
                 if (searchResultArray[i].title === currentlyOnShelfArray[i2].title) {
                     searchResultArray[i] = {
                         ...searchResultArray[i],
                         shelf: currentlyOnShelfArray[i2].shelf,
                     }
-                    //console.log('###', searchResultArray);
                 }
             }
         }
 
         this.setState({books: searchResultArray});
     }
-
 
     render() {
         let currentBooks = [];
@@ -63,22 +54,15 @@ class Search extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {
-                            //console.log('currentBooks: ', currentBooks)
-                        }
-
-                        {
-
-                                currentBooks.map((book) => {
-                                    
-                                    return (
-                                        <Book
-                                            key={book.id}
-                                            book={book}
-                                            changerSwitched={(state, book) => { this.props.changeBookState(state, book) }}
-                                        />
-                                    );
-                                })                            
-
+                            currentBooks.map((book) => {
+                                return (
+                                    <Book
+                                        key={book.id}
+                                        book={book}
+                                        changerSwitched={(state, book) => { this.props.changeBookState(state, book) }}
+                                    />
+                                );
+                            })                            
                         }
                     </ol>
                 </div>
