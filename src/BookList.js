@@ -16,15 +16,15 @@ class BookList extends Component {
                 <div>
                   <Bookshelf 
                     bookshelfName="Currently Reading" 
-                    books={books.filter((book) => {return(book.shelf==='currentlyReading')})} 
+                    books={books.filter((book) => book.shelf==='currentlyReading')} 
                     onSwitched={(state, book) => {this.props.changeBookState(state, book)}} />
                   <Bookshelf 
                     bookshelfName="Want to Read" 
-                    books={books.filter((book) => {return(book.shelf==='wantToRead')})} 
+                    books={books.filter((book) => book.shelf==='wantToRead')} 
                     onSwitched={(state, book) => {this.props.changeBookState(state, book)}} />
                   <Bookshelf 
                     bookshelfName="Read" 
-                    books={books.filter((book) => {return(book.shelf==='read')})} 
+                    books={books.filter((book) => book.shelf==='read')} 
                     onSwitched={(state, book) => {this.props.changeBookState(state, book)}} />
                 </div>
               </div>

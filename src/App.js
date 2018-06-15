@@ -15,9 +15,7 @@ export default class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll()
       .then((books) => {
-        this.setState(() => ({
-          books: books
-        }))
+        this.setState({ books });
       })
   }
 
