@@ -35,6 +35,7 @@ export default class BooksApp extends React.Component {
           shelf: stateOfReadness,
         }
         existingFlag = 1;
+        BooksAPI.update(currentBooks[i], stateOfReadness);
       }
     }
     // if a book has been assigned a new shelf but wasn't on the shelves before, we add it to the shelf
@@ -44,6 +45,7 @@ export default class BooksApp extends React.Component {
         shelf: stateOfReadness,
       };
       currentBooks.push(book);
+      BooksAPI.update(book, stateOfReadness);
     }
     this.setState((prevState) => ({
       books: currentBooks,
